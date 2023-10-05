@@ -3,7 +3,7 @@ function createPromise(position, delay) {
 
   return new Promise((resolve, reject) => {
     let delays =
-      Number(delayEl.value) + Number(stepEl.value) * (promisesCount - 1);
+      Number(delayEl.value) + Number(stepEl.value) * (promiseCounter - 1);
     setTimeout(() => {
       if (shouldResolve) {
         // Fulfill
@@ -21,7 +21,7 @@ const stepEl = document.querySelector('input[name="step"]'); //delay
 const amountEl = document.querySelector('input[name="amount"]'); //position
 const formEl = document.querySelector('form');
 const buttonEl = document.querySelector('button');
-let promisesCount = 1;
+let promiseCounter = 1;
 let timerId = null;
 
 formEl.addEventListener('submit', onFormSubmit);
@@ -39,13 +39,13 @@ function onFormSubmit(evt) {
 }
 
 function showPromises() {
-  const promise = createPromise(promisesCount, delayEl.value);
+  const promise = createPromise(promiseCounter, delayEl.value);
 
-  promisesCount += 1;
+  promiseCounter += 1;
 
-  if (promisesCount > Number(amountEl.value)) {
+  if (promiseCounter > Number(amountEl.value)) {
     clearInterval(timerId);
-    promisesCount = 1;
+    promiseCounter = 1;
     buttonEl.disabled = false;
   }
 
